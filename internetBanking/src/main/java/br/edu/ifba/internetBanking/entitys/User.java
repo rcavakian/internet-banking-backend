@@ -2,6 +2,7 @@ package br.edu.ifba.internetBanking.entitys;
 
 import java.time.LocalDateTime;
 
+import br.edu.ifba.internetBanking.dtos.UserForm;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,9 +20,18 @@ public class User {
     @Column(unique = true)
     private String email;
     private String senhaHash;
-    private LocalDateTime dataCadastro;
+    private LocalDateTime dateRegister;
 
     public User(){}
+
+    public User(UserForm userForm) {
+        this.id = userForm.id();
+        this.name = userForm.name();
+        this.cpf = userForm.cpf();
+        this.email = userForm.email();
+        this.senhaHash = userForm.senhaHash();
+        this.dateRegister = userForm.dateRegister();
+    }
 
     public Long getId() {
         return id;
@@ -63,12 +73,12 @@ public class User {
         this.senhaHash = senhaHash;
     }
 
-    public LocalDateTime getDataCadastro() {
-        return dataCadastro;
+    public LocalDateTime getDateRegister() {
+        return dateRegister;
     }
 
-    public void setDataCadastro(LocalDateTime dataCadastro) {
-        this.dataCadastro = dataCadastro;
+    public void setDateRegister(LocalDateTime dateRegister) {
+        this.dateRegister = dateRegister;
     }
 
 }
