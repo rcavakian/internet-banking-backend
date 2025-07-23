@@ -3,6 +3,7 @@ package br.edu.ifba.internetBanking.entitys;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import br.edu.ifba.internetBanking.dtos.OperationDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,6 +25,15 @@ public class Operation {
     private Account account;
 
     public Operation() {}
+
+    public Operation(OperationDTO operationDTO) {
+        this.id = operationDTO.id();
+        this.operationType = operationDTO.operationType();
+        this.value = operationDTO.value();
+        this.dateTime = operationDTO.dateTime();
+        this.description = operationDTO.description();
+        this.account = operationDTO.account();
+    }
 
     public Long getId() {
         return id;

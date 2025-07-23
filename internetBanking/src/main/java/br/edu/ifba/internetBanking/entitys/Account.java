@@ -2,6 +2,7 @@ package br.edu.ifba.internetBanking.entitys;
 
 import java.math.BigDecimal;
 
+import br.edu.ifba.internetBanking.dtos.AccountDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,6 +23,14 @@ public class Account {
     private User user;
 
     public Account() {}
+
+    public Account(AccountDTO accountDTO) {
+        this.id = accountDTO.id();
+        this.number = accountDTO.number();
+        this.agengy = accountDTO.agency();
+        this.balence = accountDTO.balence();
+        this.user = accountDTO.user();
+    }
 
     public Long getId() {
         return id;
