@@ -9,7 +9,6 @@ import br.edu.ifba.internetBanking.repositorys.UserRepository;
 @Service
 public class UserService{
     private UserRepository userRepository;
-    private AccountService accountService;
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -18,7 +17,7 @@ public class UserService{
     public UserForm save(UserForm userForm) {
         User user = new User(userForm);
         user = userRepository.save(user);
-        accountService.save(user);
+        
         
         return new UserForm(user);
     }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.edu.ifba.internetBanking.dtos.AccountDTO;
+import br.edu.ifba.internetBanking.dtos.UserForm;
 import br.edu.ifba.internetBanking.services.AccountService;
 
 @RestController
@@ -23,9 +24,9 @@ public class AccountController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<AccountDTO> save(@RequestBody AccountDTO accountDTO, UriComponentsBuilder uriBuilder) {
+	public ResponseEntity<AccountDTO> save(@RequestBody UserForm userForm, UriComponentsBuilder uriBuilder) {
 		
-		AccountDTO dto = this.accountService.save(accountDTO);
+		AccountDTO dto = this.accountService.save(userForm);
 		URI uri = uriBuilder.path("/accounts/{id}").buildAndExpand(dto.id()).toUri();
 		
 		return ResponseEntity.created(uri).body(dto);

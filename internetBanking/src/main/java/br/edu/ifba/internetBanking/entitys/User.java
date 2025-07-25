@@ -2,6 +2,7 @@ package br.edu.ifba.internetBanking.entitys;
 
 import java.time.LocalDateTime;
 
+import br.edu.ifba.internetBanking.dtos.UserDTO;
 import br.edu.ifba.internetBanking.dtos.UserForm;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -31,6 +32,15 @@ public class User {
         this.email = userForm.email();
         this.senhaHash = userForm.senhaHash();
         this.dateRegister = userForm.dateRegister();
+    }
+
+    public User(UserDTO userDTO) {
+        this.id = userDTO.id();
+        this.name = userDTO.name();
+        this.cpf = userDTO.cpf();
+        this.email = userDTO.email();
+        this.senhaHash = userDTO.senhaHash();
+        this.dateRegister = userDTO.dateRegister();
     }
 
     public Long getId() {

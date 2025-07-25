@@ -16,7 +16,7 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String number;
-    private String agengy;
+    private String agengy = "0001";
     private BigDecimal balence;
     @OneToOne
     @JoinColumn(name = "user_id")
@@ -50,10 +50,6 @@ public class Account {
 
     public String getAgengy() {
         return agengy;
-    }
-
-    public void setAgengy(String agengy) {
-        this.agengy = agengy;
     }
 
     public BigDecimal getBalence() {
