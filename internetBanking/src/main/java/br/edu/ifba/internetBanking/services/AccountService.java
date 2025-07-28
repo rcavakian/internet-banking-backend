@@ -26,13 +26,10 @@ public class AccountService {
     }
 
     private String generateAccountNumber() {
-        String lastNumber = accountRepository.searchLastNumberCreated();
-        int newNumber = 0;
-        if(lastNumber != null) {
-            newNumber = Integer.parseInt(lastNumber) + 1;
-        }
-        else {
-            newNumber = 1;
+        Account lastAccount = accountRepository.findTopByOrderByIdDesc();
+        int newNumber = 1;
+        if(lastAccount != null) {
+            newNumber = Integer.parseInt(lastAccount.getNumber()) + 1;
         }
 
         return String.format("%08d", newNumber);
