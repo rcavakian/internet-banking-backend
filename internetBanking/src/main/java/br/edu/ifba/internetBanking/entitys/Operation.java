@@ -26,6 +26,10 @@ public class Operation {
 
     public Operation() {}
 
+    public Operation(OperationType operationType, BigDecimal value, String description, Account account) {
+        
+    }
+
     public Operation(OperationDTO operationDTO) {
         this.id = operationDTO.id();
         this.operationType = operationDTO.operationType();

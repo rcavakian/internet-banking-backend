@@ -17,7 +17,7 @@ public class Account {
     private Long id;
     private String number;
     private String agengy = "0001";
-    private BigDecimal balence;
+    private BigDecimal balance;
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -28,8 +28,16 @@ public class Account {
         this.id = accountDTO.id();
         this.number = accountDTO.number();
         this.agengy = accountDTO.agency();
-        this.balence = accountDTO.balence();
+        this.balance = accountDTO.balance();
         this.user = accountDTO.user();
+    }
+
+    public void deposit(BigDecimal value) {
+        this.balance = this.balance.add(value);
+    }
+
+    public void withdrawal(BigDecimal value) {
+        this.balance = this.balance.subtract(value);
     }
 
     public Long getId() {
@@ -52,12 +60,12 @@ public class Account {
         return agengy;
     }
 
-    public BigDecimal getBalence() {
-        return balence;
+    public BigDecimal getBalance() {
+        return balance;
     }
 
-    public void setBalence(BigDecimal balence) {
-        this.balence = balence;
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
     }
 
     public User getUser() {

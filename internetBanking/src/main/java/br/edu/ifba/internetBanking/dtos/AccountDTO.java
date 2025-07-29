@@ -6,8 +6,8 @@ import br.edu.ifba.internetBanking.entitys.Account;
 import br.edu.ifba.internetBanking.entitys.User;
 
 
-public record AccountDTO(Long id, String number, String agency, BigDecimal balence, User user) {
+public record AccountDTO(Long id, String number, String agency, BigDecimal balance, User user) {
     public AccountDTO(Account account) {
-        this(account.getId(), account.getNumber(), account.getAgengy(), account.getBalence(), account.getUser());
+        this(account.getId(), account.getNumber(), account.getAgengy(), account.getBalance(), account.getUser());
     }
 }
