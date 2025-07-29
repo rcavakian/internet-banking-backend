@@ -1,16 +1,17 @@
 package br.edu.ifba.internetBanking.services;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import br.edu.ifba.internetBanking.dtos.OperationDTO;
-import br.edu.ifba.internetBanking.entitys.Account;
-import br.edu.ifba.internetBanking.entitys.Operation;
-import br.edu.ifba.internetBanking.entitys.OperationType;
-import br.edu.ifba.internetBanking.repositorys.AccountRepository;
-import br.edu.ifba.internetBanking.repositorys.OperationRepository;
+import br.edu.ifba.internetBanking.entities.Account;
+import br.edu.ifba.internetBanking.entities.Operation;
+import br.edu.ifba.internetBanking.entities.OperationType;
+import br.edu.ifba.internetBanking.repositories.AccountRepository;
+import br.edu.ifba.internetBanking.repositories.OperationRepository;
 
 @Service
 public class OperationService {
@@ -90,5 +91,19 @@ public class OperationService {
 
     public List<OperationDTO> statement() {
         return null;
+    }
+    
+    public List<OperationDTO> listByMonthYear(int year, int month) {
+    	
+    	LocalDateTime dateTime = LocalDateTime.of(year, month, 1, 0, 0);
+    	
+    	return operationRepository.findByDateTime(dateTime).stream().map(OperationDTO::new).toList();
+    }
+    
+    public List<OperationDTO> listByType(OperationType operationType) {
+    	
+    	List<Operation> operations = operationRepository.findByOperationType(operationType);
+    	
+    	return operations.stream().map(OperationDTO::new).toList();
     }
 }

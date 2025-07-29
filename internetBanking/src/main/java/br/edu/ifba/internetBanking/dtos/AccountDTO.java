@@ -2,8 +2,8 @@ package br.edu.ifba.internetBanking.dtos;
 
 import java.math.BigDecimal;
 
-import br.edu.ifba.internetBanking.entitys.Account;
-import br.edu.ifba.internetBanking.entitys.User;
+import br.edu.ifba.internetBanking.entities.Account;
+import br.edu.ifba.internetBanking.entities.User;
 
 
 public record AccountDTO(Long id, String number, String agency, BigDecimal balance, User user) {

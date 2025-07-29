@@ -1,4 +1,4 @@
-package br.edu.ifba.internetBanking.entitys;
+package br.edu.ifba.internetBanking.entities;
 
 import java.math.BigDecimal;
 

@@ -3,8 +3,8 @@ package br.edu.ifba.internetBanking.services;
 import org.springframework.stereotype.Service;
 
 import br.edu.ifba.internetBanking.dtos.UserForm;
-import br.edu.ifba.internetBanking.entitys.User;
-import br.edu.ifba.internetBanking.repositorys.UserRepository;
+import br.edu.ifba.internetBanking.entities.User;
+import br.edu.ifba.internetBanking.repositories.UserRepository;
 
 @Service
 public class UserService{

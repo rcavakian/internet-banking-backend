@@ -4,9 +4,9 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ifba.internetBanking.dtos.AccountDTO;
 import br.edu.ifba.internetBanking.dtos.UserForm;
-import br.edu.ifba.internetBanking.entitys.Account;
-import br.edu.ifba.internetBanking.entitys.User;
-import br.edu.ifba.internetBanking.repositorys.AccountRepository;
+import br.edu.ifba.internetBanking.entities.Account;
+import br.edu.ifba.internetBanking.entities.User;
+import br.edu.ifba.internetBanking.repositories.AccountRepository;
 
 @Service
 public class AccountService {
