@@ -82,6 +82,7 @@ public class OperationService {
 
         Operation operation = new Operation();
         operation.setOperationType(OperationType.PAYMENT);
+        operation.setDescription(description);
         operation.setAccount(account);
 
         operationRepository.save(operation);
