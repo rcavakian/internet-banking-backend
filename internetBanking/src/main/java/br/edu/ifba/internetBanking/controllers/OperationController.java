@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import br.edu.ifba.internetBanking.dtos.DepositRequestDTO;
 import br.edu.ifba.internetBanking.dtos.OperationDTO;
+import br.edu.ifba.internetBanking.dtos.PaymentRequestDTO;
+import br.edu.ifba.internetBanking.dtos.WithdrawRequestDTO;
 import br.edu.ifba.internetBanking.entities.OperationType;
 import br.edu.ifba.internetBanking.services.OperationService;
 
@@ -50,4 +53,36 @@ public class OperationController {
 		
 		return ResponseEntity.ok(operations);
 	}
+
+	@PostMapping("/deposit")
+	public ResponseEntity<OperationDTO> deposit(@RequestBody DepositRequestDTO depositRequestDTO, UriComponentsBuilder uriComponentsBuilder) {
+		OperationDTO operationDTO = operationService.deposit(depositRequestDTO.accountId(), depositRequestDTO.value());
+		URI uri = uriComponentsBuilder.path("/operations/{id}").buildAndExpand(operationDTO.id()).toUri();
+		
+		return ResponseEntity.created(uri).body(operationDTO);
+	}
+
+	@PostMapping("/withdraw")
+	public ResponseEntity<OperationDTO> withdraw(@RequestBody WithdrawRequestDTO withdrawRequestDTO, UriComponentsBuilder uriComponentsBuilder) {
+		OperationDTO operationDTO = operationService.withdrawal(withdrawRequestDTO.accountId(), withdrawRequestDTO.value());
+		URI uri = uriComponentsBuilder.path("/operations/{id}").buildAndExpand(operationDTO.id()).toUri();
+
+		return ResponseEntity.created(uri).body(operationDTO);
+	}
+
+	@PostMapping("/payment")
+	public ResponseEntity<OperationDTO> payment(@RequestBody PaymentRequestDTO paymentRequestDTO, UriComponentsBuilder uriComponentsBuilder) {
+		OperationDTO operationDTO = operationService.payment(paymentRequestDTO.accountId(), paymentRequestDTO.value(), paymentRequestDTO.description());
+		URI uri = uriComponentsBuilder.path("/operations/{id}").buildAndExpand(operationDTO.id()).toUri();
+
+		return ResponseEntity.created(uri).body(operationDTO);
+	}
+	
+	@GetMapping("/statment")
+	public ResponseEntity<List<OperationDTO>> statment(@RequestParam Long accountId) {
+		List<OperationDTO> operationDTOs = operationService.statement(accountId);
+
+		return ResponseEntity.ok().body(operationDTOs);
+	}
+	
 }

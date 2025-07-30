@@ -30,7 +30,7 @@ public class OperationService {
         return new OperationDTO(operation);
     }
 
-    public void deposit(Long accountId, BigDecimal value) {
+    public OperationDTO deposit(Long accountId, BigDecimal value) {
         if (value.compareTo(BigDecimal.ZERO) <= 0) {
             throw new IllegalArgumentException("Value should be more than 0.");
         }
@@ -44,9 +44,13 @@ public class OperationService {
         operation.setAccount(account);
 
         operationRepository.save(operation);
+
+        OperationDTO operationDTO = new OperationDTO(operation);
+
+        return operationDTO;
     }
 
-    public void withdrawal(Long accountId, BigDecimal value) {
+    public OperationDTO withdrawal(Long accountId, BigDecimal value) {
         if (value.compareTo(BigDecimal.ZERO) <= 0) {
             throw new IllegalArgumentException("Value should be more than 0.");
         }
@@ -65,9 +69,13 @@ public class OperationService {
         operation.setAccount(account);
 
         operationRepository.save(operation);
+
+        OperationDTO operationDTO = new OperationDTO(operation);
+
+        return operationDTO;
     }
 
-    public void payment(Long accountId, BigDecimal value, String description) {
+    public OperationDTO payment(Long accountId, BigDecimal value, String description) {
         if (value.compareTo(BigDecimal.ZERO) <= 0) {
             throw new IllegalArgumentException("Value should be more than 0.");
         }
@@ -87,10 +95,16 @@ public class OperationService {
         operation.setAccount(account);
 
         operationRepository.save(operation);
+
+        OperationDTO operationDTO = new OperationDTO(operation);
+
+        return operationDTO;
     }
 
-    public List<OperationDTO> statement() {
-        return null;
+    public List<OperationDTO> statement(Long accountId) {
+        Account account = accountRepository.findById(accountId).orElseThrow(() -> new IllegalArgumentException("Account not found."));
+
+        return operationRepository.findAllByAccount(account).stream().map(OperationDTO :: new).toList();
     }
     
     public List<OperationDTO> listByMonthYear(int year, int month) {
