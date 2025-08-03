@@ -12,6 +12,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import br.edu.ifba.internetBanking.dtos.AccountDTO;
 import br.edu.ifba.internetBanking.dtos.UserForm;
 import br.edu.ifba.internetBanking.services.AccountService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 @RestController
 @RequestMapping("/accounts")
@@ -23,6 +25,8 @@ public class AccountController {
 		this.accountService = accountService;
 	}
 	
+	@Operation(summary = "Save Account", description = "Save Accounts")
+	@ApiResponse(responseCode = "200", description = "Save Account")
 	@PostMapping
 	public ResponseEntity<AccountDTO> save(@RequestBody UserForm userForm, UriComponentsBuilder uriBuilder) {
 		
