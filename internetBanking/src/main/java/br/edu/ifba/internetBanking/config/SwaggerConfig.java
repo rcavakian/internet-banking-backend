@@ -11,6 +11,10 @@ public class SwaggerConfig {
 
     @Bean
     public OpenAPI customOpenAPI() {
-        return new OpenAPI().info(new Info().title("API de Internet Banking").version("1.0").description("Documentação da API de Internet Banking"));
+        return new OpenAPI()
+        .info(new Info()
+        .title("API de Internet Banking")
+        .version("1.0")
+        .description("Documentação da API de Internet Banking"));
     }
 }

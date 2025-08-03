@@ -1,6 +1,12 @@
 package br.edu.ifba.internetBanking.entities;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import br.edu.ifba.internetBanking.dtos.UserDTO;
 import br.edu.ifba.internetBanking.dtos.UserForm;
@@ -11,7 +17,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity(name = "/users")
-public class User {
+public class User implements UserDetails{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,7 +26,7 @@ public class User {
     private String cpf;
     @Column(unique = true)
     private String email;
-    private String senhaHash;
+    private String passwordHash;
     private LocalDateTime dateRegister;
 
     public User(){}
@@ -30,7 +36,7 @@ public class User {
         this.name = userForm.name();
         this.cpf = userForm.cpf();
         this.email = userForm.email();
-        this.senhaHash = userForm.senhaHash();
+        this.passwordHash = userForm.passwordHash();
         this.dateRegister = userForm.dateRegister();
     }
 
@@ -39,7 +45,7 @@ public class User {
         this.name = userDTO.name();
         this.cpf = userDTO.cpf();
         this.email = userDTO.email();
-        this.senhaHash = userDTO.senhaHash();
+        this.passwordHash = userDTO.passwordHash();
         this.dateRegister = userDTO.dateRegister();
     }
 
@@ -75,12 +81,12 @@ public class User {
         this.email = email;
     }
 
-    public String getSenhaHash() {
-        return senhaHash;
+    public String getPasswordHash() {
+        return passwordHash;
     }
 
-    public void setSenhaHash(String senhaHash) {
-        this.senhaHash = senhaHash;
+    public void setpasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 
     public LocalDateTime getDateRegister() {
@@ -89,6 +95,21 @@ public class User {
 
     public void setDateRegister(LocalDateTime dateRegister) {
         this.dateRegister = dateRegister;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+    }
+
+    @Override
+    public String getPassword() {
+        throw new UnsupportedOperationException("Unimplemented method 'getPassword'");
+    }
+
+    @Override
+    public String getUsername() {
+        throw new UnsupportedOperationException("Unimplemented method 'getUsername'");
     }
 
 }
