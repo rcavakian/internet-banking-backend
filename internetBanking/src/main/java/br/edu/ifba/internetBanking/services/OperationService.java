@@ -4,8 +4,11 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.edu.ifba.internetBanking.clients.EmailClient;
+import br.edu.ifba.internetBanking.clients.EmailDTO;
 import br.edu.ifba.internetBanking.dtos.OperationDTO;
 import br.edu.ifba.internetBanking.entities.Account;
 import br.edu.ifba.internetBanking.entities.Operation;
@@ -15,6 +18,9 @@ import br.edu.ifba.internetBanking.repositories.OperationRepository;
 
 @Service
 public class OperationService {
+	
+	@Autowired
+	private EmailClient emailClient;
     private OperationRepository operationRepository;
     private AccountRepository accountRepository;
 
@@ -46,6 +52,13 @@ public class OperationService {
         operationRepository.save(operation);
 
         OperationDTO operationDTO = new OperationDTO(operation);
+        
+        emailClient.sendEmail(new EmailDTO("an.bezerra@gmail.com", 
+							               "an.bezerra@gmail.com",
+							               "New Deposit",
+							               "Hello, " + account.getUser().getName() + 
+							               "! We received a deposit of R$" + value + 
+							               ". Current balance: " + account.getBalance()));
 
         return operationDTO;
     }
@@ -71,6 +84,14 @@ public class OperationService {
         operationRepository.save(operation);
 
         OperationDTO operationDTO = new OperationDTO(operation);
+        
+        emailClient.sendEmail(new EmailDTO("an.bezerra@gmail.com", 
+							               "an.bezerra@gmail.com",
+							               "New Withdrawal",
+							               "Hello, " + account.getUser().getName() + 
+							               "! Your transaction of amount R$" + value + 
+							               " is successful. " +
+							               "Current balance: " + account.getBalance()));
 
         return operationDTO;
     }
@@ -97,6 +118,13 @@ public class OperationService {
         operationRepository.save(operation);
 
         OperationDTO operationDTO = new OperationDTO(operation);
+        
+        emailClient.sendEmail(new EmailDTO("an.bezerra@gmail.com", 
+							               "an.bezerra@gmail.com",
+							               "New Payment",
+							               "Hello, " + account.getUser().getName() + 
+							               "! You have just paid R$" + value +
+							               ". Current balance: " + account.getBalance()));
 
         return operationDTO;
     }
