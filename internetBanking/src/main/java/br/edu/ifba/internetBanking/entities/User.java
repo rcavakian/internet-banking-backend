@@ -8,7 +8,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import br.edu.ifba.internetBanking.dtos.UserDTO;
 import br.edu.ifba.internetBanking.dtos.UserForm;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
