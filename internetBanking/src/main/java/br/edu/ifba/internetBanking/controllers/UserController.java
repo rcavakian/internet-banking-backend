@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import br.edu.ifba.internetBanking.dtos.UserDTO;
 import br.edu.ifba.internetBanking.dtos.UserForm;
 import br.edu.ifba.internetBanking.services.UserService;
 
@@ -23,11 +24,10 @@ public class UserController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<UserForm> save(@RequestBody UserForm userForm, UriComponentsBuilder uriBuilder) {
+	public ResponseEntity<UserDTO> save(@RequestBody UserForm userForm, UriComponentsBuilder uriBuilder) {
+		UserDTO userDTO = this.userService.save(userForm);
+		URI uri = uriBuilder.path("/users/{id}").buildAndExpand(userDTO.id()).toUri();
 		
-		UserForm form = this.userService.save(userForm);
-		URI uri = uriBuilder.path("/users/{id}").buildAndExpand(form.id()).toUri();
-		
-		return ResponseEntity.created(uri).body(form);
+		return ResponseEntity.created(uri).body(userDTO);
 	}
 }

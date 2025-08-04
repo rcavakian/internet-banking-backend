@@ -31,6 +31,15 @@ public class User implements UserDetails{
 
     public User(){}
 
+    public User(Long id, String name, String cpf, String email, String passwordHash, LocalDateTime dateRegister) {
+        this.id = id;
+        this.name = name;
+        this.cpf = cpf;
+        this.email = email;
+        this.passwordHash = passwordHash;
+        this.dateRegister = dateRegister;
+    }
+
     public User(UserForm userForm) {
         this.id = userForm.id();
         this.name = userForm.name();
@@ -38,15 +47,6 @@ public class User implements UserDetails{
         this.email = userForm.email();
         this.passwordHash = userForm.passwordHash();
         this.dateRegister = userForm.dateRegister();
-    }
-
-    public User(UserDTO userDTO) {
-        this.id = userDTO.id();
-        this.name = userDTO.name();
-        this.cpf = userDTO.cpf();
-        this.email = userDTO.email();
-        this.passwordHash = userDTO.passwordHash();
-        this.dateRegister = userDTO.dateRegister();
     }
 
     public Long getId() {

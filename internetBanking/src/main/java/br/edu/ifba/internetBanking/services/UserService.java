@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ifba.internetBanking.clients.EmailClient;
 import br.edu.ifba.internetBanking.clients.EmailDTO;
+import br.edu.ifba.internetBanking.dtos.UserDTO;
 import br.edu.ifba.internetBanking.dtos.UserForm;
 import br.edu.ifba.internetBanking.entities.User;
 import br.edu.ifba.internetBanking.repositories.UserRepository;
@@ -20,7 +21,7 @@ public class UserService{
         this.userRepository = userRepository;
     }
 
-    public UserForm save(UserForm userForm) {
+    public UserDTO save(UserForm userForm) {
         User user = new User(userForm);
         user = userRepository.save(user);
         
@@ -28,6 +29,6 @@ public class UserService{
         		                           "an.bezerra@gmail.com",
         		                           "Registry Successfull",
         		                           "Welcome to Caramelo Bank! Your account was successfully created."));
-        return new UserForm(user);
+        return new UserDTO(user);
     }
 }
