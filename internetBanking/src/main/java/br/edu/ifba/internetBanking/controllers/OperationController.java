@@ -18,6 +18,8 @@ import br.edu.ifba.internetBanking.dtos.PaymentRequestDTO;
 import br.edu.ifba.internetBanking.dtos.WithdrawRequestDTO;
 import br.edu.ifba.internetBanking.entities.OperationType;
 import br.edu.ifba.internetBanking.services.OperationService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 @RestController
 @RequestMapping("/operations")
@@ -29,6 +31,8 @@ public class OperationController {
 		this.operationService = operationService;
 	}
 	
+	@Operation(summary = "Save Operation", description = "Save Operation")
+	@ApiResponse(responseCode = "200", description = "Save Operation")
 	@PostMapping
 	public ResponseEntity<OperationDTO> save(@RequestBody OperationDTO operationDTO, UriComponentsBuilder uriBuilder) {
 		

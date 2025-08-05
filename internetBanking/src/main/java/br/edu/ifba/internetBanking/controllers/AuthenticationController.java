@@ -11,7 +11,9 @@ import br.edu.ifba.internetBanking.dtos.AuthenticationData;
 import br.edu.ifba.internetBanking.dtos.TokenJWTData;
 import br.edu.ifba.internetBanking.entities.User;
 import br.edu.ifba.internetBanking.services.JWTokenService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 @RestController
 @RequestMapping("/login")
@@ -24,6 +26,8 @@ public class AuthenticationController {
         this.tokenService = tokenService;
     }
 
+    @Operation(summary = "Login", description = "Login")
+	@ApiResponse(responseCode = "200", description = "Login")
     @PostMapping
     public ResponseEntity<?> login(@RequestBody AuthenticationData authenticationData) {
         var data = new UsernamePasswordAuthenticationToken(authenticationData.login(), authenticationData.password());
