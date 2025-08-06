@@ -15,7 +15,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import br.edu.ifba.internetBanking.dtos.DepositRequestDTO;
 import br.edu.ifba.internetBanking.dtos.OperationDTO;
 import br.edu.ifba.internetBanking.dtos.PaymentRequestDTO;
-import br.edu.ifba.internetBanking.dtos.WithdrawRequestDTO;
+import br.edu.ifba.internetBanking.dtos.WithdrawalRequestDTO;
 import br.edu.ifba.internetBanking.entities.OperationType;
 import br.edu.ifba.internetBanking.services.OperationService;
 
@@ -63,8 +63,8 @@ public class OperationController {
 	}
 
 	@PostMapping("/withdrawal")
-	public ResponseEntity<OperationDTO> withdraw(@RequestBody WithdrawRequestDTO withdrawRequestDTO, UriComponentsBuilder uriComponentsBuilder) {
-		OperationDTO operationDTO = operationService.withdrawal(withdrawRequestDTO.accountId(), withdrawRequestDTO.value());
+	public ResponseEntity<OperationDTO> withdraw(@RequestBody WithdrawalRequestDTO withdrawalRequestDTO, UriComponentsBuilder uriComponentsBuilder) {
+		OperationDTO operationDTO = operationService.withdrawal(withdrawalRequestDTO.accountId(), withdrawalRequestDTO.value());
 		URI uri = uriComponentsBuilder.path("/operations/{id}").buildAndExpand(operationDTO.id()).toUri();
 
 		return ResponseEntity.created(uri).body(operationDTO);

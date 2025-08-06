@@ -79,7 +79,9 @@ public class OperationService {
             throw new IllegalArgumentException("Insufficient funds.");
         }
 
-        account.withdrawal(value);
+        BigDecimal newBalance = account.getBalance().subtract(value);
+        account.setBalance(newBalance);
+
         accountRepository.save(account);
 
         Operation operation = new Operation();
@@ -114,7 +116,9 @@ public class OperationService {
             throw new IllegalArgumentException("Payment denied. Insufficient funds.");
         }
 
-        account.withdrawal(value);
+        BigDecimal newBalance = account.getBalance().subtract(value);
+        account.setBalance(newBalance);
+
         accountRepository.save(account);
 
         Operation operation = new Operation();
