@@ -40,12 +40,12 @@ public class User implements UserDetails{
     }
 
     public User(UserForm userForm) {
-        this.id = userForm.id();
         this.name = userForm.name();
         this.cpf = userForm.cpf();
         this.email = userForm.email();
         this.passwordHash = userForm.passwordHash();
-        this.dateRegister = userForm.dateRegister();
+        setDateRegister();
+        this.dateRegister = getDateRegister();
     }
 
     public Long getId() {
@@ -92,8 +92,8 @@ public class User implements UserDetails{
         return dateRegister;
     }
 
-    public void setDateRegister(LocalDateTime dateRegister) {
-        this.dateRegister = dateRegister;
+    public void setDateRegister() {
+        this.dateRegister = LocalDateTime.now();
     }
 
     @Override
