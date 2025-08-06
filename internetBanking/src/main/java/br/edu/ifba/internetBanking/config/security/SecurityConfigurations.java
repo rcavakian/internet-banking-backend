@@ -31,6 +31,7 @@ public class SecurityConfigurations {
             .authorizeHttpRequests(req -> req
                 // liberar login
                 .requestMatchers(HttpMethod.POST, "/login").permitAll()
+                .requestMatchers(HttpMethod.POST, "/users").permitAll()
                 // liberar Swagger/OpenAPI
                 .requestMatchers(
                     "/swagger-ui.html",

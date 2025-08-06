@@ -16,19 +16,20 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity(name = "users")
-public class User implements UserDetails{
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @Column(unique =  true)
+    @Column(unique = true)
     private String cpf;
     @Column(unique = true)
     private String email;
     private String passwordHash;
     private LocalDateTime dateRegister;
 
-    public User(){}
+    public User() {
+    }
 
     public User(Long id, String name, String cpf, String email, String passwordHash, LocalDateTime dateRegister) {
         this.id = id;
@@ -84,7 +85,7 @@ public class User implements UserDetails{
         return passwordHash;
     }
 
-    public void setpasswordHash(String passwordHash) {
+    public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
     }
 
@@ -103,12 +104,12 @@ public class User implements UserDetails{
 
     @Override
     public String getPassword() {
-        throw new UnsupportedOperationException("Unimplemented method 'getPassword'");
+        return this.passwordHash; // seu campo de senha criptografada
     }
 
     @Override
     public String getUsername() {
-        throw new UnsupportedOperationException("Unimplemented method 'getUsername'");
+        return this.cpf; // ou email, dependendo do seu critério de login
     }
 
 }

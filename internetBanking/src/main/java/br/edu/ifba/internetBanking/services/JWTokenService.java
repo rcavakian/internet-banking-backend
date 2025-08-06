@@ -23,10 +23,10 @@ public class JWTokenService {
         try {
             var algorithm = Algorithm.HMAC256(secret);
             return JWT.create()
-            .withIssuer("InternetBanking API")
-            .withSubject(user.getCpf())
-            .withExpiresAt(dateExpiration())
-            .sign(algorithm);
+                    .withIssuer("InternetBanking API")
+                    .withSubject(user.getCpf())
+                    .withExpiresAt(dateExpiration())
+                    .sign(algorithm);
         } catch (JWTCreationException exception) {
             throw new RuntimeException("error generating jwt token", exception);
         }
@@ -40,12 +40,25 @@ public class JWTokenService {
         try {
             var algorithm = Algorithm.HMAC256(secret);
             return JWT.require(algorithm)
-            .withIssuer("InternetBanking API")
-            .build()
-            .verify(tokenJWT)
-            .getSubject();
+                    .withIssuer("InternetBanking API")
+                    .build()
+                    .verify(tokenJWT)
+                    .getSubject();
         } catch (JWTVerificationException exception) {
             throw new RuntimeException("Invalid or expired JWT token");
+        }
+    }
+
+    public boolean validateToken(String tokenJWT) {
+        try {
+            var algorithm = Algorithm.HMAC256(secret);
+            JWT.require(algorithm)
+                    .withIssuer("InternetBanking API")
+                    .build()
+                    .verify(tokenJWT);
+            return true;
+        } catch (JWTVerificationException e) {
+            return false;
         }
     }
 }

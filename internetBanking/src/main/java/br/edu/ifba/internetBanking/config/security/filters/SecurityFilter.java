@@ -27,7 +27,7 @@ public class SecurityFilter extends OncePerRequestFilter{
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         var token = recoverToken(request);
-        if (token != null) {
+        if (token != null && tokenService.validateToken(token)) {
             var login = tokenService.getSubject(token);
             var user = userRepository.findByCpf(login);
             var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());

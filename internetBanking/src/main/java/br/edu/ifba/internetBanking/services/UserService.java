@@ -1,6 +1,5 @@
 package br.edu.ifba.internetBanking.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.edu.ifba.internetBanking.clients.EmailClient;
@@ -12,12 +11,11 @@ import br.edu.ifba.internetBanking.repositories.UserRepository;
 
 @Service
 public class UserService{
-	
-	@Autowired
 	private EmailClient emailClient;
     private UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(EmailClient emailClient, UserRepository userRepository) {
+        this.emailClient = emailClient;
         this.userRepository = userRepository;
     }
 
