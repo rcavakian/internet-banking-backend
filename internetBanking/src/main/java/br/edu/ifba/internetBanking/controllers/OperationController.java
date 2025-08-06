@@ -62,7 +62,7 @@ public class OperationController {
 		return ResponseEntity.created(uri).body(operationDTO);
 	}
 
-	@PostMapping("/withdraw")
+	@PostMapping("/withdrawal")
 	public ResponseEntity<OperationDTO> withdraw(@RequestBody WithdrawRequestDTO withdrawRequestDTO, UriComponentsBuilder uriComponentsBuilder) {
 		OperationDTO operationDTO = operationService.withdrawal(withdrawRequestDTO.accountId(), withdrawRequestDTO.value());
 		URI uri = uriComponentsBuilder.path("/operations/{id}").buildAndExpand(operationDTO.id()).toUri();

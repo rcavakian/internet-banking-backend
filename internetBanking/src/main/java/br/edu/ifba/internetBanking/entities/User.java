@@ -44,7 +44,6 @@ public class User implements UserDetails {
         this.cpf = userForm.cpf();
         this.email = userForm.email();
         this.passwordHash = userForm.passwordHash();
-        //setDateRegister();
         this.dateRegister = LocalDateTime.now();
     }
 

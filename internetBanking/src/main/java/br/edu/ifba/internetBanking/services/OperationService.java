@@ -42,7 +42,10 @@ public class OperationService {
         }
         
         Account account = accountRepository.findById(accountId).orElseThrow(() -> new IllegalArgumentException("Account not found."));
-        account.deposit(value);
+        
+        BigDecimal newBalance = account.getBalance().add(value);
+        account.setBalance(newBalance);
+
         accountRepository.save(account);
 
         Operation operation = new Operation();

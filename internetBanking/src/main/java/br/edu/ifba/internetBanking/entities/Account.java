@@ -32,10 +32,6 @@ public class Account {
         this.user = accountDTO.user();
     }
 
-    public void deposit(BigDecimal value) {
-        this.balance = this.balance.add(value);
-    }
-
     public void withdrawal(BigDecimal value) {
         this.balance = this.balance.subtract(value);
     }

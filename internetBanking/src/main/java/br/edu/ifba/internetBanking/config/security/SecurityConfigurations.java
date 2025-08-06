@@ -36,7 +36,7 @@ public class SecurityConfigurations {
                 .requestMatchers(HttpMethod.GET, "/accounts").permitAll()
                 .requestMatchers(HttpMethod.POST, "/operations").permitAll()
                 .requestMatchers(HttpMethod.GET, "/operations").permitAll()
-                .requestMatchers(HttpMethod.POST, "/operations/depoist").permitAll()
+                .requestMatchers(HttpMethod.POST, "/operations/deposit").permitAll()
                 .requestMatchers(HttpMethod.POST, "/operations/payment").permitAll()
                 .requestMatchers(HttpMethod.POST, "/operations/withdrawal").permitAll()
                 .requestMatchers(HttpMethod.GET, "/operations/statement").permitAll()
