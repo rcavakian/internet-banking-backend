@@ -28,8 +28,7 @@ public class User implements UserDetails {
     private String passwordHash;
     private LocalDateTime dateRegister;
 
-    public User() {
-    }
+    public User() {}
 
     public User(Long id, String name, String cpf, String email, String passwordHash, LocalDateTime dateRegister) {
         this.id = id;
@@ -45,8 +44,8 @@ public class User implements UserDetails {
         this.cpf = userForm.cpf();
         this.email = userForm.email();
         this.passwordHash = userForm.passwordHash();
-        setDateRegister();
-        this.dateRegister = getDateRegister();
+        //setDateRegister();
+        this.dateRegister = LocalDateTime.now();
     }
 
     public Long getId() {
@@ -91,10 +90,6 @@ public class User implements UserDetails {
 
     public LocalDateTime getDateRegister() {
         return dateRegister;
-    }
-
-    public void setDateRegister() {
-        this.dateRegister = LocalDateTime.now();
     }
 
     @Override

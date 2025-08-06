@@ -1,9 +1,11 @@
 package br.edu.ifba.internetBanking.services;
 
+import java.math.BigDecimal;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import br.edu.ifba.internetBanking.dtos.AccountDTO;
-import br.edu.ifba.internetBanking.dtos.UserForm;
 import br.edu.ifba.internetBanking.entities.Account;
 import br.edu.ifba.internetBanking.entities.User;
 import br.edu.ifba.internetBanking.repositories.AccountRepository;
@@ -16,13 +18,26 @@ public class AccountService {
         this.accountRepository = accountRepository;
     }
 
-    public AccountDTO save(UserForm userForm) {
+    public AccountDTO save(AccountDTO accountDTO) {
         Account account = new Account();
-        account.setUser(new User(userForm));
+        account.setUser(accountDTO.user());
         account.setNumber(generateAccountNumber());
+        account.setBalance(BigDecimal.ZERO);
         account = accountRepository.save(account);
 
         return new AccountDTO(account);
+    }
+    
+    public Account createAccountForUser(User user) {
+        Account account = new Account();
+        account.setUser(user);
+        account.setNumber(generateAccountNumber());
+        account.setBalance(BigDecimal.ZERO);
+        return accountRepository.save(account);
+    }
+    
+    public List<AccountDTO> list() {
+        return this.accountRepository.findAll().stream().map(AccountDTO::new).toList();
     }
 
     private String generateAccountNumber() {

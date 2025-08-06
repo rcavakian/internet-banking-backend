@@ -17,7 +17,7 @@ public class Account {
     private Long id;
     private String number;
     private String agengy = "0001";
-    private BigDecimal balance;
+    private BigDecimal balance = BigDecimal.ZERO;
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;

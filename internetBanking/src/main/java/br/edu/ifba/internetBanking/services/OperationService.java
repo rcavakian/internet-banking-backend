@@ -47,6 +47,8 @@ public class OperationService {
 
         Operation operation = new Operation();
         operation.setOperationType(OperationType.DEPOSIT);
+        operation.setValue(value);
+        operation.setDateTime(LocalDateTime.now());
         operation.setAccount(account);
 
         operationRepository.save(operation);
@@ -79,6 +81,8 @@ public class OperationService {
 
         Operation operation = new Operation();
         operation.setOperationType(OperationType.WITHDRAWAL);
+        operation.setValue(value);
+        operation.setDateTime(LocalDateTime.now());
         operation.setAccount(account);
 
         operationRepository.save(operation);
@@ -112,6 +116,8 @@ public class OperationService {
 
         Operation operation = new Operation();
         operation.setOperationType(OperationType.PAYMENT);
+        operation.setValue(value);
+        operation.setDateTime(LocalDateTime.now());
         operation.setDescription(description);
         operation.setAccount(account);
 

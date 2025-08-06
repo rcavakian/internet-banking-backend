@@ -32,6 +32,16 @@ public class SecurityConfigurations {
                 // liberar login
                 .requestMatchers(HttpMethod.POST, "/login").permitAll()
                 .requestMatchers(HttpMethod.POST, "/users").permitAll()
+                .requestMatchers(HttpMethod.GET, "/users").permitAll()
+                .requestMatchers(HttpMethod.GET, "/accounts").permitAll()
+                .requestMatchers(HttpMethod.POST, "/operations").permitAll()
+                .requestMatchers(HttpMethod.GET, "/operations").permitAll()
+                .requestMatchers(HttpMethod.POST, "/operations/depoist").permitAll()
+                .requestMatchers(HttpMethod.POST, "/operations/payment").permitAll()
+                .requestMatchers(HttpMethod.POST, "/operations/withdrawal").permitAll()
+                .requestMatchers(HttpMethod.GET, "/operations/statement").permitAll()
+
+
                 // liberar Swagger/OpenAPI
                 .requestMatchers(
                     "/swagger-ui.html",
