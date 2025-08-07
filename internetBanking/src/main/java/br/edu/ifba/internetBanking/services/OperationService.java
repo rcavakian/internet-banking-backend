@@ -36,7 +36,7 @@ public class OperationService {
         return new OperationDTO(operation);
     }
 
-    public OperationDTO deposit(Long accountId, BigDecimal value) {
+    public OperationDTO deposit(Long accountId, BigDecimal value, String description) {
         if (value.compareTo(BigDecimal.ZERO) <= 0) {
             throw new IllegalArgumentException("Value should be more than 0.");
         }
@@ -52,6 +52,7 @@ public class OperationService {
         operation.setOperationType(OperationType.DEPOSIT);
         operation.setValue(value);
         operation.setDateTime(LocalDateTime.now());
+        operation.setDescription(description);
         operation.setAccount(account);
 
         operationRepository.save(operation);
@@ -68,7 +69,7 @@ public class OperationService {
         return operationDTO;
     }
 
-    public OperationDTO withdrawal(Long accountId, BigDecimal value) {
+    public OperationDTO withdrawal(Long accountId, BigDecimal value, String description) {
         if (value.compareTo(BigDecimal.ZERO) <= 0) {
             throw new IllegalArgumentException("Value should be more than 0.");
         }
@@ -88,6 +89,7 @@ public class OperationService {
         operation.setOperationType(OperationType.WITHDRAWAL);
         operation.setValue(value);
         operation.setDateTime(LocalDateTime.now());
+        operation.setDescription(description);
         operation.setAccount(account);
 
         operationRepository.save(operation);

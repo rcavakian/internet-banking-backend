@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.edu.ifba.internetBanking.dtos.AccountDTO;
+import br.edu.ifba.internetBanking.entities.User;
 //import br.edu.ifba.internetBanking.dtos.UserForm;
 import br.edu.ifba.internetBanking.services.AccountService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -38,10 +40,12 @@ public class AccountController {
 		return ResponseEntity.created(uri).body(dto);
 	}
 	
-	@Operation(summary = "List Accounts", description = "List all accounts")
-	@ApiResponse(responseCode = "200", description = "List of accounts")
+	@Operation(summary = "List User Accounts", description = "List accounts for authenticated user")
+	@ApiResponse(responseCode = "200", description = "List of user accounts")
 	@GetMapping
 	public List<AccountDTO> list() {
-		return this.accountService.list();
+		// Obter o usuário autenticado atual
+		User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return this.accountService.findAccountsByUser(currentUser);
 	}
 }

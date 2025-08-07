@@ -56,7 +56,7 @@ public class OperationController {
 
 	@PostMapping("/deposit")
 	public ResponseEntity<OperationDTO> deposit(@RequestBody DepositRequestDTO depositRequestDTO, UriComponentsBuilder uriComponentsBuilder) {
-		OperationDTO operationDTO = operationService.deposit(depositRequestDTO.accountId(), depositRequestDTO.value());
+		OperationDTO operationDTO = operationService.deposit(depositRequestDTO.accountId(), depositRequestDTO.value(), depositRequestDTO.description());
 		URI uri = uriComponentsBuilder.path("/operations/{id}").buildAndExpand(operationDTO.id()).toUri();
 		
 		return ResponseEntity.created(uri).body(operationDTO);
@@ -64,7 +64,7 @@ public class OperationController {
 
 	@PostMapping("/withdrawal")
 	public ResponseEntity<OperationDTO> withdraw(@RequestBody WithdrawalRequestDTO withdrawalRequestDTO, UriComponentsBuilder uriComponentsBuilder) {
-		OperationDTO operationDTO = operationService.withdrawal(withdrawalRequestDTO.accountId(), withdrawalRequestDTO.value());
+		OperationDTO operationDTO = operationService.withdrawal(withdrawalRequestDTO.accountId(), withdrawalRequestDTO.value(), withdrawalRequestDTO.description());
 		URI uri = uriComponentsBuilder.path("/operations/{id}").buildAndExpand(operationDTO.id()).toUri();
 
 		return ResponseEntity.created(uri).body(operationDTO);

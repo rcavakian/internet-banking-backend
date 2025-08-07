@@ -33,11 +33,18 @@ public class AccountService {
         account.setUser(user);
         account.setNumber(generateAccountNumber());
         account.setBalance(BigDecimal.ZERO);
+        // A agência já é definida como "0001" por padrão na entidade
         return accountRepository.save(account);
     }
     
     public List<AccountDTO> list() {
         return this.accountRepository.findAll().stream().map(AccountDTO::new).toList();
+    }
+    
+    public List<AccountDTO> findAccountsByUser(User user) {
+        return this.accountRepository.findByUser(user).stream()
+            .map(AccountDTO::new)
+            .toList();
     }
 
     private String generateAccountNumber() {
