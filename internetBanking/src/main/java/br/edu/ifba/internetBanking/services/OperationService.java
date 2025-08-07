@@ -63,7 +63,7 @@ public class OperationService {
 							               "New Deposit",
 							               "Hello, " + account.getUser().getName() + 
 							               "! We received a deposit of R$" + value + 
-							               ". Current balance: " + account.getBalance()));
+							               ". Current balance: R$" + account.getBalance()));
 
         return operationDTO;
     }
@@ -100,7 +100,7 @@ public class OperationService {
 							               "Hello, " + account.getUser().getName() + 
 							               "! Your transaction of amount R$" + value + 
 							               " is successful. " +
-							               "Current balance: " + account.getBalance()));
+							               "Current balance: R$" + account.getBalance()));
 
         return operationDTO;
     }
@@ -137,7 +137,7 @@ public class OperationService {
 							               "New Payment",
 							               "Hello, " + account.getUser().getName() + 
 							               "! You have just paid R$" + value +
-							               ". Current balance: " + account.getBalance()));
+							               ". Current balance: R$" + account.getBalance()));
 
         return operationDTO;
     }

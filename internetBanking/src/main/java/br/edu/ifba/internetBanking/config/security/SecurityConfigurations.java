@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -16,6 +17,7 @@ import br.edu.ifba.internetBanking.config.security.filters.SecurityFilter;
 
 @EnableWebSecurity
 @Configuration
+@EnableMethodSecurity(securedEnabled = true)
 public class SecurityConfigurations {
     private final SecurityFilter securityFilter;
 
@@ -25,24 +27,20 @@ public class SecurityConfigurations {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity
+        return httpSecurity
+            .cors(cors -> cors.disable())
             .csrf(csrf -> csrf.disable())
             .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(req -> req
-                // liberar login
-                .requestMatchers(HttpMethod.POST, "/login").permitAll()
+                // liberar OPTIONS para CORS preflight
+                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                // liberar endpoints de teste (apenas para desenvolvimento)
+                .requestMatchers("/test/**").permitAll()
+                // liberar endpoints de login
+                .requestMatchers(HttpMethod.POST, "/login", "/auth/login", "/internetbanking/login", "/internetbanking/auth/login").permitAll()
+                // liberar criação de usuários
                 .requestMatchers(HttpMethod.POST, "/users").permitAll()
-                .requestMatchers(HttpMethod.GET, "/users").permitAll()
-                .requestMatchers(HttpMethod.GET, "/accounts").permitAll()
-                .requestMatchers(HttpMethod.POST, "/operations").permitAll()
-                .requestMatchers(HttpMethod.GET, "/operations").permitAll()
-                .requestMatchers(HttpMethod.POST, "/operations/deposit").permitAll()
-                .requestMatchers(HttpMethod.POST, "/operations/payment").permitAll()
-                .requestMatchers(HttpMethod.POST, "/operations/withdrawal").permitAll()
-                .requestMatchers(HttpMethod.GET, "/operations/statement").permitAll()
-
-
-                // liberar Swagger/OpenAPI
+                // liberar Swagger/OpenAPI (apenas para desenvolvimento/documentação)
                 .requestMatchers(
                     "/swagger-ui.html",
                     "/swagger-ui/**",
@@ -51,12 +49,13 @@ public class SecurityConfigurations {
                     "/swagger-resources/**",
                     "/webjars/**"
                 ).permitAll()
+                // liberar página de erro
+                .requestMatchers("/error").permitAll()
                 // o restante exige autenticação
                 .anyRequest().authenticated()
             )
-            .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
-
-        return httpSecurity.build();
+            .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
+            .build();
     }
 
     @Bean
@@ -119,4 +118,4 @@ public class SecurityConfigurations {
         return new BCryptPasswordEncoder();
     }
 }
-    */
+*/
