@@ -59,7 +59,7 @@ public class OperationService {
 
         OperationDTO operationDTO = new OperationDTO(operation);
         
-        emailClient.sendEmail(new EmailDTO("an.bezerra@gmail.com", 
+        emailClient.sendEmail(new EmailDTO("bancocaramelo2000@gmail.com", 
 							               account.getUser().getEmail(),
 							               "New Deposit",
 							               "Hello, " + account.getUser().getName() + 
@@ -96,7 +96,7 @@ public class OperationService {
 
         OperationDTO operationDTO = new OperationDTO(operation);
         
-        emailClient.sendEmail(new EmailDTO("an.bezerra@gmail.com", 
+        emailClient.sendEmail(new EmailDTO("bancocaramelo2000@gmail.com", 
 							               account.getUser().getEmail(),
 							               "New Withdrawal",
 							               "Hello, " + account.getUser().getName() + 
@@ -134,7 +134,7 @@ public class OperationService {
 
         OperationDTO operationDTO = new OperationDTO(operation);
         
-        emailClient.sendEmail(new EmailDTO("an.bezerra@gmail.com", 
+        emailClient.sendEmail(new EmailDTO("bancocaramelo2000@gmail.com", 
 							               account.getUser().getEmail(),
 							               "New Payment",
 							               "Hello, " + account.getUser().getName() + 
