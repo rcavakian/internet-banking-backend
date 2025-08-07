@@ -40,7 +40,7 @@ public class UserService{
         accountService.createAccountForUser(user);
         
         emailClient.sendEmail(new EmailDTO("an.bezerra@gmail.com", 
-        		                           "an.bezerra@gmail.com",
+        		                           user.getEmail(),
         		                           "Registry Successfull",
         		                           "Welcome to Caramelo Bank, " +
                                            user.getName() + "! Your account was successfully created."));

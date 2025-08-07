@@ -60,7 +60,7 @@ public class OperationService {
         OperationDTO operationDTO = new OperationDTO(operation);
         
         emailClient.sendEmail(new EmailDTO("an.bezerra@gmail.com", 
-							               "an.bezerra@gmail.com",
+							               account.getUser().getEmail(),
 							               "New Deposit",
 							               "Hello, " + account.getUser().getName() + 
 							               "! We received a deposit of R$" + value + 
@@ -97,7 +97,7 @@ public class OperationService {
         OperationDTO operationDTO = new OperationDTO(operation);
         
         emailClient.sendEmail(new EmailDTO("an.bezerra@gmail.com", 
-							               "an.bezerra@gmail.com",
+							               account.getUser().getEmail(),
 							               "New Withdrawal",
 							               "Hello, " + account.getUser().getName() + 
 							               "! Your transaction of amount R$" + value + 
@@ -135,7 +135,7 @@ public class OperationService {
         OperationDTO operationDTO = new OperationDTO(operation);
         
         emailClient.sendEmail(new EmailDTO("an.bezerra@gmail.com", 
-							               "an.bezerra@gmail.com",
+							               account.getUser().getEmail(),
 							               "New Payment",
 							               "Hello, " + account.getUser().getName() + 
 							               "! You have just paid R$" + value +
